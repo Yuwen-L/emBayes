@@ -1,0 +1,2 @@
+# SSEM
+R package SSEM
