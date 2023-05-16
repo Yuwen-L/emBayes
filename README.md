@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# interep
+# emBayes
 
 > **Inter**action Analysis of **Rep**eated Measure Data
 
