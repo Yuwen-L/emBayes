@@ -14,21 +14,24 @@ This package incorporates our recently developed spike-and-slab quantile LASSO p
     library(emBayes)
     data(genes)
     ## Load the clinical factors, genetic factors, response and quantile data
-    e=dat$e
-    g=dat$z
-    y=dat$y
-    ## Initial value for the coefficient vector
-    beta0=dat$coef
-    ## True nonzero coefficients
-    index=dat$index
-    b = interep(e, g, y,beta0,corre="e",pmethod="mixed",lam1=dat$lam1, lam2=dat$lam2,maxits=30)
-    ## Cut off the noise
-    b[abs(b)<0.05]=0
-    ## Compute TP and FP
-    pos = which(b != 0)
-    tp = length(intersect(index, pos))
-    fp = length(pos) - tp
-    list(tp=tp, fp=fp)
+    clin=genes$clin
+    X=genes$X
+    y=genes$y
+    quant=genes$quant
+    ## Generate tuning vectors of desired range
+    t0 <- seq(0.01,0.015,length.out=2)
+    t1 <- seq(0.1,0.5,length.out=2)
+    ## Perform cross-validation and obtain tuning parameters based on check loss
+    CV <- cv.emBayes(y,clin,X,quant,t0,t1,k=5,func="BQLSS",error=0.01,maxiter=2000)
+    s0 <- CV$CL.s0
+    s1 <- CV$CL.s1
+    ## Perform BQLSS under optimal tuning and calculate value of TP and FP for selecting beta
+    EM <- emBayes(y,clin,X,quant,s0,s1,func="BQLSS",error=0.01,maxiter=2000)
+    fit <- EM$beta
+    coef <- genes$coef
+    tp <- sum(fit[coef!=0]!=0)
+    fp <- sum(fit[coef==0]!=0)
+    list(tp=tp,fp=fp)
 
 
 
