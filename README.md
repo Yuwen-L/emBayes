@@ -1,2 +1,2 @@
-# SSEM
-R package SSEM
+# emBayes
+R package emBayes
