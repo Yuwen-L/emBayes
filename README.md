@@ -5,6 +5,8 @@ R package emBayes
 
   library(emBayes)
   data(genes)
+  
+  data(genes)
   ##load the clinical factors, genetic factors, response and quantile data
   clin=genes$clin
   X=genes$X
