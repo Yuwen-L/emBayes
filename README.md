@@ -3,7 +3,7 @@ R package emBayes
 
 ## Example
 
-  library(emBayes)\\
+  library(emBayes)
   data(genes)
   
   data(genes)
