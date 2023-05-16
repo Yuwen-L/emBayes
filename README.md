@@ -11,9 +11,9 @@ This package incorporates our recently developed spike-and-slab quantile LASSO p
 
 ## Example
 
-    library(interep)
-    data("dat")
-    ## Load the environment factors, lipid factors and the response
+    library(emBayes)
+    data(genes)
+    ## Load the clinical factors, genetic factors, response and quantile data
     e=dat$e
     g=dat$z
     y=dat$y
