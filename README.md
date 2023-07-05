@@ -22,11 +22,11 @@ Variable selection methods have been extensively developed for analyzing high-di
     t0 <- seq(0.01,0.015,length.out=2)
     t1 <- seq(0.1,0.5,length.out=2)
     ## Perform cross-validation and obtain tuning parameters based on check loss
-    CV <- cv.emBayes(y,clin,X,quant,t0,t1,k=5,func="BQLSS",error=0.01,maxiter=2000)
+    CV <- cv.emBayes(y,clin,X,quant,t0,t1,k=5,func="ssQLASSO",error=0.01,maxiter=200)
     s0 <- CV$CL.s0
     s1 <- CV$CL.s1
     ## Perform BQLSS under optimal tuning and calculate value of TP and FP for selecting beta
-    EM <- emBayes(y,clin,X,quant,s0,s1,func="BQLSS",error=0.01,maxiter=2000)
+    EM <- emBayes(y,clin,X,quant,s0,s1,func="ssQLASSO",error=0.01,maxiter=200)
     fit <- EM$beta
     coef <- genes$coef
     tp <- sum(fit[coef!=0]!=0)
